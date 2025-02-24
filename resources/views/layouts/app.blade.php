@@ -75,7 +75,9 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('repair.create') }}">แจ้งซ่อม</a></li>
                             <li><a class="dropdown-item" href="{{ route('repair.track') }}">ติดตามการสั่งซ่อมของฉัน</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="{{ route('repair.index') }}">รายการซ่อม (ช่างซ่อม)</a></li>
                         </ul>
                     </li>
@@ -84,29 +86,32 @@
                 <!-- Right side: User Name & Logout -->
                 <ul class="navbar-nav ms-auto">
                     @auth
-                        <!-- Username -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-user-circle"></i> {{ auth()->user()->name }}
-                            </a>
-                        </li>
+                    <!-- Username with Icon on the Left -->
+                    <li class="nav-item d-flex align-items-center">
+                        <!-- Management Icon -->
+                        <img src="{{ asset('/management.png') }}" width="30" height="30" alt="Logo" class="me-2">
 
-                        <!-- Logout Button -->
-                        <li class="nav-item">
-                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                @csrf
-                                <button class="btn btn-outline-danger ms-2" type="submit">
-                                    <i class="fas fa-sign-out-alt"></i> ออกจากระบบ
-                                </button>
-                            </form>
-                        </li>
+                        <!-- Username -->
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-user-circle"></i> {{ auth()->user()->name }}
+                        </a>
+                    </li>
+
+                    <!-- Logout Button -->
+                    <li class="nav-item">
+                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button class="btn btn-outline-danger ms-2" type="submit">
+                                <i class="fas fa-sign-out-alt"></i> ออกจากระบบ
+                            </button>
+                        </form>
+                    </li>
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">เข้าสู่ระบบ</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">เข้าสู่ระบบ</a>
+                    </li>
                     @endauth
                 </ul>
-
             </div>
         </div>
     </nav>
