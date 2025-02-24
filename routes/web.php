@@ -10,27 +10,41 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+// ==================== 🔐 AUTHENTICATION ====================
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthenController::class, 'register'])->name('register');
     Route::post('/register/authenticate', [AuthenController::class, 'store'])->name('register.auth');
-    route::get('/login', [AuthenController::class, 'Login'])->name('login');
+    Route::get('/login', [AuthenController::class, 'Login'])->name('auth.login');
     Route::post('/login/authenticate', [AuthenController::class, 'Authen'])->name('login.authenticate');
 });
 
+// Route สำหรับ Logout
 Route::post('/logout', function () {
     Auth::logout();
-    return redirect('/login'); // ✅ Redirect ไปหน้า Login หลังจาก Logout
+    return redirect('/login');
 })->name('logout');
 
-// Routes สำหรับ Repair
+// ==================== 🛠️ REPAIRS ====================
+
+// ✅ 1. แสดงรายการงานซ่อม
 Route::get('/repairs', [RepairController::class, 'index'])->name('repair.index');
+
+// ✅ 2. สร้างงานซ่อมใหม่
 Route::get('/repairs/create', [RepairController::class, 'create'])->name('repair.create');
 Route::post('/repairs', [RepairController::class, 'store'])->name('repair.store');
-Route::get('/repairs/{id}', [RepairController::class, 'show'])->name('repair.show');
-Route::get('/repairs/{id}/edit', [RepairController::class, 'edit'])->name('repair.edit');
-Route::put('/repairs/{id}', [RepairController::class, 'update'])->name('repair.update');
-Route::delete('/repairs/{id}', [RepairController::class, 'destroy'])->name('repair.destroy');
+
+// ✅ 3. ติดตามงานซ่อม (ต้องอยู่ก่อน /repairs/{id})
 Route::get('/repairs/track', [RepairController::class, 'track'])->name('repair.track');
 
+// ✅ 4. แสดงรายละเอียดงานซ่อม
+Route::get('/repairs/{id}', [RepairController::class, 'show'])->name('repair.show');
+
+// ✅ 5. แก้ไขงานซ่อม
+Route::get('/repairs/{id}/edit', [RepairController::class, 'edit'])->name('repair.edit');
+Route::put('/repairs/{id}', [RepairController::class, 'update'])->name('repair.update');
+
+// ✅ 6. ลบงานซ่อม
+Route::delete('/repairs/{id}', [RepairController::class, 'destroy'])->name('repair.destroy');

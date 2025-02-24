@@ -10,7 +10,10 @@ class RepairController extends Controller
     // 📋 แสดงรายการซ่อมทั้งหมด
     public function index()
     {
+        // ดึงข้อมูลทั้งหมดจากฐานข้อมูล
         $repairs = Repair::all();
+
+        // ส่งข้อมูลไปที่ view
         return view('repair.index', compact('repairs'));
     }
 
@@ -25,17 +28,20 @@ class RepairController extends Controller
     {
         $request->validate([
             'user_name'   => 'required|string|max:255',
-            'phone'       => 'required|string|max:20',
-            'description' => 'required|string',
+            'phone'       => 'required|digits:10', // ✅ ตรวจสอบให้ใส่ตัวเลข 10 หลักเท่านั้น
             'equipment'   => 'required|string|max:255',
+            'description' => 'required|string',
+        ], [
+            'phone.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
+            'phone.digits'   => 'หมายเลขโทรศัพท์ต้องมี 10 หลัก',
         ]);
 
         Repair::create([
             'user_name'   => $request->user_name,
             'phone'       => $request->phone,
-            'description' => $request->description,
             'equipment'   => $request->equipment,
-            'status'      => 'pending' // ค่าเริ่มต้น
+            'description' => $request->description,
+            'status'      => 'pending',
         ]);
 
         return redirect()->route('repair.index')->with('success', 'แจ้งซ่อมสำเร็จ!');
@@ -44,8 +50,9 @@ class RepairController extends Controller
     // 🔍 แสดงรายละเอียดงานซ่อม
     public function show($id)
     {
-        $repair = Repair::findOrFail($id);
+        $repair = Repair::findOrFail($id); // ดึงข้อมูลงานซ่อมจากฐานข้อมูล
         return view('repair.show', compact('repair'));
+        // ส่งข้อมูลไปยัง view
     }
 
     // ✏️ แสดงฟอร์มแก้ไขงานซ่อม
@@ -84,7 +91,10 @@ class RepairController extends Controller
     // 🛠 ฟังก์ชันติดตามงานซ่อม
     public function track()
     {
-        $repairs = Repair::where('status', '!=', 'completed')->get();
+        // ดึงข้อมูลงานซ่อมทั้งหมดจากฐานข้อมูล
+        $repairs = Repair::orderBy('created_at', 'desc')->get();
+
+        // ส่งข้อมูลไปยัง View 'repair.track'
         return view('repair.track', compact('repairs'));
     }
 }

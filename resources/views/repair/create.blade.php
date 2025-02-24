@@ -5,14 +5,14 @@
     <h2>แจ้งซ่อมใหม่</h2>
 
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>พบข้อผิดพลาด!</strong>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="alert alert-danger">
+        <strong>พบข้อผิดพลาด!</strong>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
 
     <form action="{{ route('repair.store') }}" method="POST">
@@ -25,8 +25,15 @@
 
         <div class="mb-3">
             <label for="phone" class="form-label">เบอร์โทร</label>
-            <input type="text" class="form-control" name="phone" required>
+            <input type="text"
+                class="form-control"
+                id="phone"
+                name="phone"
+                maxlength="10"
+                pattern="\d{10}"
+                required>
         </div>
+
 
         <div class="mb-3">
             <label for="equipment" class="form-label">อุปกรณ์</label>
