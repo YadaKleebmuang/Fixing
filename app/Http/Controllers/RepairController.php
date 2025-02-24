@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
+
 use Illuminate\Http\Request;
 use App\Models\Repair;
 
@@ -91,10 +94,32 @@ class RepairController extends Controller
     // 🛠 ฟังก์ชันติดตามงานซ่อม
     public function track()
     {
-        // ดึงข้อมูลงานซ่อมทั้งหมดจากฐานข้อมูล
-        $repairs = Repair::orderBy('created_at', 'desc')->get();
+        try {
+            // ดึงข้อมูลงานซ่อมทั้งหมด
+            $repairs = Repair::all();
+    
+            // ตรวจสอบว่ามีข้อมูลหรือไม่
+            if ($repairs->isEmpty()) {
+                return view('repair.track')->with('message', 'ไม่มีข้อมูลงานซ่อม');
+            }
+    
+            return view('repair.track', compact('repairs'));
+        } catch (\Exception $e) {
+            // แสดง Error หากเกิดปัญหา
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
 
-        // ส่งข้อมูลไปยัง View 'repair.track'
-        return view('repair.track', compact('repairs'));
+
+    public function downloadPdf()
+    {
+        // ดึงข้อมูลทั้งหมดจากฐานข้อมูล
+        $repairs = Repair::all();
+
+        // โหลด view สำหรับสร้าง PDF
+        $pdf = PDF::loadView('repairs.pdf', compact('repairs'));
+
+        // ดาวน์โหลดไฟล์ PDF
+        return $pdf->download('repair_report.pdf');
     }
 }

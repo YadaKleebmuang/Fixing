@@ -6,7 +6,11 @@
 <div class="container mt-4">
     <h2 class="mb-4">รายการงานซ่อม</h2>
 
-    <a href="{{ route('repair.create') }}" class="btn btn-primary mb-3">แจ้งซ่อมใหม่</a>
+    <!-- ปุ่มแจ้งซ่อมใหม่ และ ดาวน์โหลด PDF -->
+    <div class="mb-3 d-flex justify-content-between">
+        <a href="{{ route('repair.create') }}" class="btn btn-primary">แจ้งซ่อมใหม่</a>
+        <a href="{{ route('repairs.download.pdf') }}" class="btn btn-danger">ดาวน์โหลด PDF</a>
+    </div>
 
     <table class="table table-bordered">
         <thead class="table-dark">
@@ -50,4 +54,3 @@
     </table>
 </div>
 @endsection
-

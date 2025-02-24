@@ -37,8 +37,8 @@
     <div class="welcome-container">
         <h1>Welcome to Repair Management System</h1>
         <p>ระบบจัดการงานซ่อมวัสดุอุปกรณ์ไฟฟ้าที่ช่วยให้คุณติดตามงานซ่อมได้อย่างมีประสิทธิภาพ</p>
-        <a href="{{ route('register') }}" class="btn btn-primary">Register</a>
-        <a href="{{ route('login') }}" class="btn btn-secondary">Login</a>
+        <a href="{{ route('auth.register') }}" class="btn btn-primary">Register</a>
+        <a href="{{ route('auth.login') }}" class="btn btn-secondary">Login</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>

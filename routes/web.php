@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RepairController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PDFController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,7 +17,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 // ==================== 🔐 AUTHENTICATION ====================
 Route::middleware('guest')->group(function () {
-    Route::get('/register', [AuthenController::class, 'register'])->name('register');
+    Route::get('/register', [AuthenController::class, 'register'])->name('auth.register');
     Route::post('/register/authenticate', [AuthenController::class, 'store'])->name('register.auth');
     Route::get('/login', [AuthenController::class, 'Login'])->name('auth.login');
     Route::post('/login/authenticate', [AuthenController::class, 'Authen'])->name('login.authenticate');
@@ -48,3 +50,17 @@ Route::put('/repairs/{id}', [RepairController::class, 'update'])->name('repair.u
 
 // ✅ 6. ลบงานซ่อม
 Route::delete('/repairs/{id}', [RepairController::class, 'destroy'])->name('repair.destroy');
+
+
+
+// ==================== 📦 PRODUCTS ====================
+
+Route::get('/report', [ReportController::class, 'index'])->name('report.index');
+Route::get('/report/download', [ReportController::class, 'download'])->name('report.download');
+
+Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('generate.pdf');
+
+Route::get('/repairs/download', [RepairController::class, 'download'])->name('repairs.download');
+
+//pdf
+Route::get('/repairs/download-pdf', [RepairController::class, 'downloadPdf'])->name('repairs.download.pdf');
