@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>รายงานงานซ่อม</title>
     <style>
         body { font-family: DejaVu Sans, sans-serif; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #000; padding: 8px; text-align: center; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
         th { background-color: #f2f2f2; }
+        h2, p { text-align: center; }
     </style>
 </head>
 <body>
-    <h2 style="text-align: center;">รายงานงานซ่อม</h2>
+    <h2>รายงานงานซ่อมวัสดุไฟฟ้า</h2>
+    <p>วันที่: {{ date('d/m/Y') }}</p>
 
     <table>
         <thead>

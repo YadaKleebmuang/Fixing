@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RepairController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PDFController;
 
 Route::get('/', function () {
@@ -53,14 +52,9 @@ Route::delete('/repairs/{id}', [RepairController::class, 'destroy'])->name('repa
 
 
 
-// ==================== 📦 PRODUCTS ====================
+// ==================== 📦 PDF ====================
+// Route::get('/repairs/{id}/pdf', [PDFController::class, 'generatePDF'])->name('pdf.generate');
 
-Route::get('/report', [ReportController::class, 'index'])->name('report.index');
-Route::get('/report/download', [ReportController::class, 'download'])->name('report.download');
 
-Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('generate.pdf');
-
-Route::get('/repairs/download', [RepairController::class, 'download'])->name('repairs.download');
-
-//pdf
-Route::get('/repairs/download-pdf', [RepairController::class, 'downloadPdf'])->name('repairs.download.pdf');
+Route::get('/repairs/download-pdf', [PDFController::class, 'generatePDF'])->name('repairs.download.pdf');
+// Route::get('/repairs/{id}/download-pdf', [PDFController::class, 'generatePDF'])->name('repairs.download.pdf');

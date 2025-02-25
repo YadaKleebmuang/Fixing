@@ -182,9 +182,24 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
-        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,  // ✅ ใช้ \Pdf แทน \Facade
+    'providers' => ServiceProvider::defaultProviders()->merge([
+        /*
+         * Package Service Providers...
+         */
+        Barryvdh\DomPDF\ServiceProvider::class,
+
+        /*
+         * Application Service Providers...
+         */
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
     ])->toArray(),
 
-
+    'aliases' => [
+        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class, // ✅ ตรวจสอบ Alias ให้ถูกต้อง
+        // 'PDF' => Barryvdh\DomPDF\Facade::class, // ✅ ตรวจสอบ Alias ให้ถูกต้อง
+    ],
 ];

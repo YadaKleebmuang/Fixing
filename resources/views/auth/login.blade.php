@@ -91,9 +91,10 @@
     <div class="form-container">
         <h1>Login</h1>
 
-        @if (Session::has('error'))
-        <div class="alert alert-danger">{{ Session::get('error') }}</div>
+        @if (session()->has('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
+
 
         <form action="{{ route('login.authenticate') }}" method="POST">
             @csrf
