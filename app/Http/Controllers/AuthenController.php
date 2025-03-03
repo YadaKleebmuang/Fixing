@@ -16,14 +16,14 @@ class AuthenController extends Controller
     //Register
     public function register()
     {
-        return view('auth.register');
+        return view('auth.register'); 
     }
 
     //Store,Save data
     public function Store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:255'],
+            'name' => ['required', 'string', 'min:3', 'max:255'], 
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
