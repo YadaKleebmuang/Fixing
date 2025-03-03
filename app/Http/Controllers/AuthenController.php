@@ -13,57 +13,47 @@ use App\Models\User;
 class AuthenController extends Controller
 {
 
-    //Register
-    public function register()
-    {
-        return view('auth.register'); 
-    }
-
     //Store,Save data
-    public function Store(Request $request)
+    public function Register(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:255'], 
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+
         ]);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_admin' => 1, //is_customer
         ]);
 
-        Auth::login($user);
-        return redirect()->route('auth.login');
+        return redirect('/');
     }
 
-    //Login
-    public function Login()
+    public function Login(Request $request)
     {
-        return view('auth.login');
-    }
-    public function Authen(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
         ]);
-        $authen = Auth::attempt($credentials);
-        if (!$authen) {
-            Session::flash('error', 'Credentals not match!');
-            return Redirect::back();
-        } else {
-            return redirect()->route('dashboard'); // ต้องไปที่หน้า home
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+            session()->put('message', $user->name);
+
+            if ($user->is_admin == 1) {
+                return redirect()->route('customer.dashboard');
+            } else if ($user->is_admin == 0) {
+                return redirect()->route('admin.dashboard');
+            } else if ($user->is_admin == 2) {
+                return redirect()->route('employee.dashboard');
+            }
+            return redirect('/');
+
         }
+        return Redirect::back()->withErrors(['email' => 'invalid email or password . ! '])->withInput();
     }
-    //logout
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
 
-        return redirect('/login'); // ✅ Redirect ไปหน้า Login
-    }
 }

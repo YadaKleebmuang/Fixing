@@ -116,7 +116,7 @@
 
             <button class="btn btn-success" type="submit">Sign Up</button>
             <p class="text-center my-4">
-                Already have an account yet? <a href="./login">Sign In</a>
+                Already have an account yet? <a href="/">Sign In</a>
             </p>
 
         </form>

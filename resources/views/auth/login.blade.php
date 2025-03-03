@@ -92,25 +92,27 @@
         <h1>Login</h1>
 
         @if (session()->has('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
+            <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
 
 
-        <form action="{{ route('login.authenticate') }}" method="POST">
+        <form action="{{ route('login.authenticate') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-floating mb-3">
-                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter your email">
+                <input type="email" name="email" id="email"
+                    class="form-control @error('email') is-invalid @enderror" placeholder="Enter your email">
                 <label for="email">Email</label>
                 @error('email')
-                <div class="text-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="form-floating mb-3">
-                <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="Enter your password">
+                <input type="password" name="password" id="password"
+                    class="form-control @error('password') is-invalid @enderror" placeholder="Enter your password">
                 <label for="password">Password</label>
                 @error('password')
-                <div class="text-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 

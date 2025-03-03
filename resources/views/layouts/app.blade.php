@@ -45,59 +45,21 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <!-- Logo and Brand -->
-            <a class="navbar-brand d-flex align-items-center" href="{{ route('dashboard') }}">
+            <a class="navbar-brand d-flex align-items-center" href="">
                 <img src="{{ asset('/logo.png') }}" width="30" height="30" alt="Logo">
                 <span class="ms-2">Repair Management</span>
             </a>
 
-            <!-- Toggler for mobile -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Navbar Content -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <!-- Left side menu -->
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">หน้าหลัก</a>
-                    </li>
-
-                    <!-- Dropdown Menu for งานซ่อม -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            งานซ่อม
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('repair.create') }}">แจ้งซ่อม</a></li>
-                            <li><a class="dropdown-item" href="{{ route('repair.track') }}">ติดตามการสั่งซ่อมของฉัน</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="{{ route('repair.index') }}">รายการซ่อม (ช่างซ่อม)</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <!-- Right side: User Name & Logout -->
-                <ul class="navbar-nav ms-auto">
-                    @auth
-                    <!-- Username with Icon on the Left -->
+            <ul class="navbar-nav ms-auto">
+                @auth
                     <li class="nav-item d-flex align-items-center">
-                        <!-- Management Icon -->
-                        <img src="{{ asset('/management.png') }}" width="30" height="30" alt="Logo" class="me-2">
+                        <img src="" width="30" height="30" alt="Logo" class="me-2">
 
-                        <!-- Username -->
                         <a class="nav-link" href="#">
                             <i class="fas fa-user-circle"></i> {{ auth()->user()->name }}
                         </a>
                     </li>
 
-                    <!-- Logout Button -->
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
                             @csrf
@@ -106,13 +68,13 @@
                             </button>
                         </form>
                     </li>
-                    @else
+                @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">เข้าสู่ระบบ</a>
+                        <a class="nav-link" href="">เข้าสู่ระบบ</a>
                     </li>
-                    @endauth
-                </ul>
-            </div>
+                @endauth
+            </ul>
+        </div>
         </div>
     </nav>
 

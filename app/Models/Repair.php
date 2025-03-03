@@ -7,37 +7,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class Repair extends Model
 {
-    use HasFactory;
+    protected $primaryKey = 'id'; // Specify the primary key
 
-    // ระบุชื่อตาราง (optional ถ้าตารางชื่อ "repairs" อยู่แล้วไม่ต้องใส่)
+    use HasFactory;
+    // Specify the table associated with the model
     protected $table = 'repairs';
 
-    // ฟิลด์ที่สามารถกรอกข้อมูลได้ (Mass Assignment)
+    // Define the fillable attributes for mass assignment
     protected $fillable = [
-        'user_name',      // ชื่อผู้แจ้งซ่อม
-        'phone',          // เบอร์โทร
-        'description',    // รายละเอียดการซ่อม
-        'equipment',      // อุปกรณ์ที่ซ่อม
-        'status'          // สถานะ (pending, in progress, completed)
+        'customer_id',
+        'repair_detail',
+        'employee_id',
+        'product_id',
+        'status_id',
     ];
-
-    // ค่าเริ่มต้นของ attributes
-    protected $attributes = [
-        'status' => 'pending',
-    ];
-
-    // ถ้าต้องการปิดการใช้ timestamps (created_at, updated_at) ให้ใช้:
-    // public $timestamps = false;
-
-    // Example: สร้างฟังก์ชัน Custom Query Scope
-    public function scopePending($query)
+    public function customer()
     {
-        return $query->where('status', 'pending');
+        return $this->belongsTo(User::class, 'customer_id');
+    }
+    public function employee()
+    {
+        return $this->belongsTo(User::class, 'employee_id');
+    }
+    public function status()
+    {
+        return $this->belongsTo(User::class, 'status_id');
     }
 
-    // Example: ฟังก์ชันสำหรับตรวจสอบว่าการซ่อมเสร็จหรือยัง
-    public function isCompleted()
-    {
-        return $this->status === 'completed';
-    }
 }

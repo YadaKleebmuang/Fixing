@@ -13,10 +13,9 @@ class CreateRepairsTable extends Migration
     {
         Schema::create('repairs', function (Blueprint $table) {
             $table->id();
-            $table->string('user_name');
-            $table->string('phone');
-            $table->text('description');
-            $table->string('equipment');
+            $table->integer('customer_id');
+            $table->text('repair_detail');
+            $table->integer('employee_id')->nullable();
             $table->string('status')->default('pending');
             $table->timestamps();
         });

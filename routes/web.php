@@ -4,57 +4,49 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\RepairController;
-use App\Http\Controllers\PDFController;
+use App\Http\Controllers\ReqController;
+
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
+});
+Route::get('/register', function () {
+    return view('auth.register');
+    ;
+});
+Route::post('/register', [AuthenController::class, 'Register'])->name('register.auth');
+Route::post('/login', [AuthenController::class, 'Login'])->name('login.authenticate');
+
+Route::middleware('admin')->group(function () {
+    Route::get('/dashboard/admin', [DashboardController::class, 'DashboardAdmin'])->name('admin.dashboard');
+    Route::get('/dashboard/select_emp/{id}', [ReqController::class, 'SelectEmp'])->name('select.emp');
+    Route::put('/dashboard/assign_repair/{id}', [ReqController::class, 'assignRepair'])->name('assign.repair');
+    Route::get('/dashboard/admin/addemp', [DashboardController::class, 'AddEmployee'])->name('add.employeepage');
+    Route::post('/dashboard/admin/addemp', [ReqController::class, 'AddEmpToList'])->name('add.employee');
 });
 
-// Dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-// ==================== 🔐 AUTHENTICATION ====================
-Route::middleware('guest')->group(function () {
-    Route::get('/register', [AuthenController::class, 'register'])->name('auth.register');
-    Route::post('/register/authenticate', [AuthenController::class, 'store'])->name('register.auth');
-    Route::get('/login', [AuthenController::class, 'Login'])->name('auth.login');
-    Route::post('/login/authenticate', [AuthenController::class, 'Authen'])->name('login.authenticate');
+Route::middleware('customer')->group(function () {
+    Route::get('/dashboard/customer/', [DashboardController::class, 'DashboardCustomer'])->name('customer.dashboard');
+    Route::post('/dashboard/addrepair', [ReqController::class, 'storeRepair'])->name('repair.store');
+    Route::delete('/dashboard/deleterepair/{id}', [ReqController::class, 'destroyRepair'])->name('delrepair');
+    Route::get('/dashboard/customer/{id}', [ReqController::class, 'Editrepair'])->name('editrepair');
+    Route::put('/dashboard/update/{id}', [ReqController::class, 'UpdateRepair'])->name('repair.update');
 });
+
+
+
+Route::middleware('emp')->group(function () {
+    Route::get('/dashboard/emp', [DashboardController::class, 'DashboardEmployee'])->name('employee.dashboard');
+    Route::patch('/dashboard/success/{id}', [ReqController::class, 'SuccessRepair'])->name('done.working');
+});
+
+
+
 
 // Route สำหรับ Logout
 Route::post('/logout', function () {
     Auth::logout();
-    return redirect('/login');
+    return redirect('/');
 })->name('logout');
 
-// ==================== 🛠️ REPAIRS ====================
-
-// ✅ 1. แสดงรายการงานซ่อม
-Route::get('/repairs', [RepairController::class, 'index'])->name('repair.index');
-
-// ✅ 2. สร้างงานซ่อมใหม่
-Route::get('/repairs/create', [RepairController::class, 'create'])->name('repair.create');
-Route::post('/repairs', [RepairController::class, 'store'])->name('repair.store');
-
-// ✅ 3. ติดตามงานซ่อม (ต้องอยู่ก่อน /repairs/{id})
-Route::get('/repairs/track', [RepairController::class, 'track'])->name('repair.track');
-
-// ✅ 4. แสดงรายละเอียดงานซ่อม
-Route::get('/repairs/{id}', [RepairController::class, 'show'])->name('repair.show');
-
-// ✅ 5. แก้ไขงานซ่อม
-Route::get('/repairs/{id}/edit', [RepairController::class, 'edit'])->name('repair.edit');
-Route::put('/repairs/{id}', [RepairController::class, 'update'])->name('repair.update');
-
-// ✅ 6. ลบงานซ่อม
-Route::delete('/repairs/{id}', [RepairController::class, 'destroy'])->name('repair.destroy');
-
-
-
-// ==================== 📦 PDF ====================
-// Route::get('/repairs/{id}/pdf', [PDFController::class, 'generatePDF'])->name('pdf.generate');
-
-
-Route::get('/repairs/download-pdf', [PDFController::class, 'generatePDF'])->name('repairs.download.pdf');
-// Route::get('/repairs/{id}/download-pdf', [PDFController::class, 'generatePDF'])->name('repairs.download.pdf');
