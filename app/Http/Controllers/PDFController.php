@@ -20,11 +20,6 @@ class PDFController extends Controller
             ->setOption(['default_font' => 'THSarabunNew']);
 
        
-
-
-
-
-
         // ดาวน์โหลดไฟล์ PDF
         return $pdf->download('repair_list.pdf');
     }
