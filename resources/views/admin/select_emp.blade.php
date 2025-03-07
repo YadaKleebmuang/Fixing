@@ -4,19 +4,19 @@
 
     <body>
         <div class="mt-5">
-            <h3>Customer Repair Requests</h3>
+            <h3>รายละเอียด/ปัญหาของลูกค้า</h3>
             <form action="{{ route('assign.repair', $repair_edit->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Repair ID</th>
-                            <th scope="col">Repair Detail</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Created At</th>
-                            <th scope="col">Updated At</th>
-                            <th scope="col">Select Employee</th>
+                            <th scope="col">เลขที่</th>
+                            <th scope="col">ปัญหา</th>
+                            <th scope="col">สถานะ</th>
+                            <th scope="col">วันที่แจ้งซ่อม</th>
+                            <th scope="col">วันที่อัพเดท</th>
+                            <th scope="col">เลือกพนักงาน</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,7 +28,7 @@
                             <td>{{ $repair_edit->updated_at->format('Y-m-d H:i') }}</td>
                             <td>
                                 <select name="employee_id" id="employee_id" class="form-control">
-                                    <option value="">Select Employee</option>
+                                    <option value="">เลือกพนักงาน</option>
                                     @foreach ($emp as $emp_select)
                                         <option value="{{ $emp_select->id }}">{{ $emp_select->name }}</option>
                                     @endforeach
@@ -38,7 +38,7 @@
                     </tbody>
                 </table>
 
-                <button type="submit" class="btn btn-success mt-3">Assign Employee</button>
+                <button type="submit" class="btn btn-success mt-3">ยืนยันการเลือกพนังงาน</button>
             </form>
         </div>
     </body>

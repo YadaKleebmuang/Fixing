@@ -11,11 +11,11 @@
 @section('content')
 
     <body>
-        <h1>Dashboard is_employee</h1>
+        <h1>ช่างซ่อมแซม</h1>
         <div class="mt-5">
 
             <div class="d-flex gap-4">
-                <h3>My Repair </h3>
+                <h3>รายการซ่อม</h3>
                 <button class="btn btn-success">Print</button>
             </div>
             @if ($repair->isEmpty())
@@ -24,12 +24,12 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Repair ID</th>
-                            <th scope="col">Repair Detail</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Created At</th>
-                            <th scope="col">Updated At</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">เลขที่แจ้งซ่อม</th>
+                            <th scope="col">ปัญหา</th>
+                            <th scope="col">สถานะ</th>
+                            <th scope="col">วันที่แจ้งซ่อม</th>
+                            <th scope="col">วันที่อัพเดท</th>
+                            <th scope="col">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,16 +46,16 @@
                                             style="display: inline;">
                                             @csrf
                                             @method('PATCH')
-                                            <button type="submit" class="btn btn-primary">Employee fixing </button>
+                                            <button type="submit" class="btn btn-primary">กำลังดำเนินการอยู่ </button>
                                         </form>
                                     @elseif($item->status == 'done')
-                                        <button type="button" class="btn btn-success" disabled>Success</button>
+                                        <button type="button" class="btn btn-success" disabled>สำเร็จ</button>
                                     @else
                                         <form action="{{ route('select.emp', $item->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('GET')
-                                            <button type="submit" class="btn btn-warning">Select Employee</button>
+                                            <button type="submit" class="btn btn-warning">เลือกพนักงาน</button>
                                         </form>
                                     @endif
                                 </td>

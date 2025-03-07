@@ -27,7 +27,7 @@ Route::middleware('admin')->group(function () {
 
 
 Route::middleware('customer')->group(function () {
-    Route::get('/dashboard/customer/', [DashboardController::class, 'DashboardCustomer'])->name('customer.dashboard');
+    Route::get('/dashboard/customer', [DashboardController::class, 'DashboardCustomer'])->name('customer.dashboard');
     Route::post('/dashboard/addrepair', [ReqController::class, 'storeRepair'])->name('repair.store');
     Route::delete('/dashboard/deleterepair/{id}', [ReqController::class, 'destroyRepair'])->name('delrepair');
     Route::get('/dashboard/customer/{id}', [ReqController::class, 'Editrepair'])->name('editrepair');

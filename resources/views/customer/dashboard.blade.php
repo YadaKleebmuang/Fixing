@@ -15,7 +15,7 @@
 
     <body>
         <div class="container mt-5">
-            <h1>Dashboard - Customer</h1>
+            <h1>แจ้งซ่อม</h1>
 
             {{-- Display Errors --}}
             @if ($errors->any())
@@ -39,28 +39,28 @@
             <form action="{{ route('repair.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <label for="repair_detail" class="form-label">Repair Detail:</label>
+                    <label for="repair_detail" class="form-label">รายละเอียดการแจ้งซ่อม/ปัญหา:</label>
                     <textarea name="repair_detail" id="repair_detail" class="form-control" rows="4" required></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-success">Submit Repair Request</button>
+                <button type="submit" class="btn btn-success">ยืนยัน</button>
             </form>
 
             {{-- Display Repairs in Table --}}
             <div class="mt-5">
-                <h3>Your Repair Requests</h3>
+                <h3>รายการแจ้งซ่อมของคุณ</h3>
                 @if ($repair->isEmpty())
                     <p>No repair requests found.</p>
                 @else
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Repair ID</th>
-                                <th scope="col">Repair Detail</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Created At</th>
-                                <th scope="col">Updated At</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">เลขที่แจ้งซ่อม</th>
+                                <th scope="col">ปัญหา</th>
+                                <th scope="col">สถานะ</th>
+                                <th scope="col">วันที่แจ้งซ่อม</th>
+                                <th scope="col">วันที่อัพเดท</th>
+                                <th scope="col">การจัดการ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,22 +73,21 @@
                                     <td>{{ $item->updated_at->format('Y-m-d H:i') }}</td>
                                     <td>
                                         @if ($item->status == 'progress')
-                                            <button type="button" class="btn btn-secondary" disabled>Cannot Delete - In
-                                                Progress</button>
+                                            <button type="button" class="btn btn-secondary" disabled>ไม่สามรถลบได้ เนื่องจากกำลังดำเนินการอยู่</button>
                                         @elseif($item->status == 'done')
-                                            <button type="button" class="btn btn-success" disabled>Success</button>
+                                            <button type="button" class="btn btn-success" disabled>สำเร็จ</button>
                                         @else
                                             <form action="{{ route('delrepair', $item->id) }}" method="POST"
                                                 style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-danger">ลบ</button>
                                             </form>
                                             <form action="{{ route('editrepair', $item->id) }}" method="POST"
                                                 style="display: inline;">
                                                 @csrf
                                                 @method('GET')
-                                                <button type="submit" class="btn btn-warning">Edit</button>
+                                                <button type="submit" class="btn btn-warning">แก้ไข</button>
                                             </form>
                                         @endif
                                     </td>

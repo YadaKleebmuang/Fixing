@@ -15,7 +15,7 @@
 
     <body>
         <div class="container mt-5">
-            <h1>Dashboard - Customer</h1>
+            <h1>แจ้งซ่อม-แก้ไข</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -34,11 +34,11 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
-                    <label for="repair_detail" class="form-label">Repair Detail:</label>
+                    <label for="repair_detail" class="form-label">รายละเอียดการแจ้งซ่อม/ปัญหา:</label>
                     <textarea name="repair_detail" id="repair_detail" class="form-control" rows="4" required>{{ old('repair_detail', $repair_edit->repair_detail) }}</textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit Repair Request</button>
+                <button type="submit" class="btn btn-primary">ยืนยัน</button>
             </form>
         </div>
     </body>

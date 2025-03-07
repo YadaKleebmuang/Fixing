@@ -14,23 +14,23 @@
 
     <body>
         <div class="d-flex">
-            <h1>Dashboard is_admin</h1>
-            <button onclick="window.location.href='{{ route('add.employee') }}'" class="btn btn-success">Add Employee</button>
-        </div>
+            <h1>แอดมิน</h1>
+            <button onclick="window.location.href='{{ route('add.employee') }}'" class="btn btn-success">เพิ่มพนักงาน</button>
+                </div>
         <div class="mt-5">
-            <h3>Cutomers Repair Requests</h3>
+            <h3>รายละเอียด/ปัญหาของลูกค้า</h3>
             @if ($repair->isEmpty())
                 <p>No repair requests found.</p>
             @else
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Repair ID</th>
-                            <th scope="col">Repair Detail</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Created At</th>
-                            <th scope="col">Updated At</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">เลขที่แจ้งซ่อม</th>
+                            <th scope="col">ปัญหา</th>
+                            <th scope="col">สถานะ</th>
+                            <th scope="col">วันที่แจ้งซ่อม</th>
+                            <th scope="col">วันที่อัพเดท</th>
+                            <th scope="col">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,15 +43,15 @@
                                 <td>{{ $item->updated_at->format('Y-m-d H:i') }}</td>
                                 <td>
                                     @if ($item->status == 'progress')
-                                        <button type="button" class="btn btn-primary" disabled>Employee fixing </button>
+                                        <button type="button" class="btn btn-primary" disabled>พนักงานกำลังทำงาน </button>
                                     @elseif($item->status == 'done')
-                                        <button type="button" class="btn btn-success" disabled>Success</button>
+                                        <button type="button" class="btn btn-success" disabled>สำเร็จ</button>
                                     @else
                                         <form action="{{ route('select.emp', $item->id) }}" method="POST"
                                             style="display: inline;">
                                             @csrf
                                             @method('GET')
-                                            <button type="submit" class="btn btn-warning">Select Employee</button>
+                                            <button type="submit" class="btn btn-warning">เลือกพนักงาน</button>
                                         </form>
                                     @endif
                                 </td>
