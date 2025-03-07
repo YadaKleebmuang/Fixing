@@ -92,17 +92,19 @@ class ReqController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-
         ]);
-        $user = User::create([
+
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'is_admin' => 2, //is_employee
+            'is_admin' => 2, // is_employee
         ]);
 
-        return redirect('admin.dashboard')->with('success', 'Employee assigned to repair request successfully!');
+        return redirect()->back()->with('success', 'พนักงานถูกเพิ่มเรียบร้อยแล้ว!');
     }
+
+
 
     public function SuccessRepair($id)
     {
