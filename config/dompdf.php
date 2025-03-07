@@ -21,17 +21,6 @@ return [
     'convert_entities' => true,
 
     'options' => [
-        'font_dir' => public_path('fonts/'),
-        'font_cache' => storage_path('fonts/'),
-        'default_font' => 'THSarabunNew',
-        'fonts' => [
-            'THSarabunNew' => [
-                'R'  => 'THSarabunNew.ttf',
-                'B'  => 'THSarabunNew-Bold.ttf',
-                'I'  => 'THSarabunNew-Italic.ttf',
-                'BI' => 'THSarabunNew-BoldItalic.ttf',
-            ],
-        ],
         /**
          * The location of the DOMPDF font directory
          *
@@ -56,17 +45,17 @@ return [
          * Times-Roman, Times-Bold, Times-BoldItalic, Times-Italic,
          * Symbol, ZapfDingbats.
          */
-        'font_dir' => storage_path('fonts'), // advised by dompdf (https://github.com/dompdf/dompdf/pull/782)
-
-        /**
-         * The location of the DOMPDF font cache directory
-         *
-         * This directory contains the cached font metrics for the fonts used by DOMPDF.
-         * This directory can be the same as DOMPDF_FONT_DIR
-         *
-         * Note: This directory must exist and be writable by the webserver process.
-         */
-        'font_cache' => storage_path('fonts'),
+        'font_dir' => public_path('fonts/'),
+        'font_cache' => storage_path('fonts/'),
+        'default_font' => 'THSarabunNew',
+        'fonts' => [
+            'THSarabunNew' => [
+                'R'  => 'THSarabunNew.ttf',
+                'B'  => 'THSarabunNew-Bold.ttf',
+                'I'  => 'THSarabunNew-Italic.ttf',
+                'BI' => 'THSarabunNew-BoldItalic.ttf',
+            ],
+        ],
 
         /**
          * The location of a temporary directory.
@@ -102,7 +91,6 @@ return [
          * @var array
          */
         'allowed_protocols' => [
-            'data://' => ['rules' => []],
             'file://' => ['rules' => []],
             'http://' => ['rules' => []],
             'https://' => ['rules' => []],

@@ -1,4 +1,3 @@
-อ
 <!DOCTYPE html>
 <html lang="th">
 
@@ -7,19 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>รายงานรายการซ่อมทั้งหมด</title>
     <style>
-    
-        body {
-            font-family: 'TH Sarabun', 'THSarabunNew', sans-serif, Arial, Helvetica;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+         @font-face {
+        font-family: 'THSarabunNew';
+        src: url('{{ public_path("fonts/THSarabunNew.ttf") }}') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
 
-        body {
-            font-family: "THSarabunNew", sans-serif;
-        }
+    @font-face {
+        font-family: 'THSarabunNew';
+        src: url('{{ public_path("fonts/THSarabunNew-Bold.ttf") }}') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+    }
+
+    body {
+        font-family: 'THSarabunNew', sans-serif;
+    }
 
         table {
             width: 100%;
@@ -62,14 +65,14 @@
         </thead>
         <tbody>
             @foreach ($repairs as $index => $repair)
-            <tr>
-                <td>{{ $index + 1 }}</td>
-                <td>{{ $repair->customer_id }}</td>
-                <td>{{ $repair->repair_detail }}</td>
-                <td>{{ $repair->employee_id ?? 'ยังไม่ระบุ' }}</td>
-                <td>{{ $repair->status }}</td>
-                <td>{{ \Carbon\Carbon::parse($repair->created_at)->format('d/m/Y H:i') }}</td>
-            </tr>
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $repair->customer_id }}</td>
+                    <td>{{ $repair->repair_detail }}</td>
+                    <td>{{ $repair->employee_id ?? 'ยังไม่ระบุ' }}</td>
+                    <td>{{ $repair->status }}</td>
+                    <td>{{ \Carbon\Carbon::parse($repair->created_at)->format('d/m/Y H:i') }}</td>
+                </tr>
             @endforeach
         </tbody>
     </table>

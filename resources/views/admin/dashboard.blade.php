@@ -8,7 +8,28 @@
     <title>dashboard-customer</title>
     <!-- Add Chart.js from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
 </head>
+
+<style>
+        @font-face {
+            font-family: 'THSarabunNew';
+            src: url('{{ public_path('fonts/THSarabunNew.ttf') }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'THSarabunNew';
+            src: url('{{ public_path('fonts/THSarabunNew-Bold.ttf') }}') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Kanit', sans-serif;
+        }
+</style>
 
 
 @extends('layouts.app')

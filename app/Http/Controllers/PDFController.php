@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDF;
+use SVG\Tag\Rect;
 use App\Models\Repair; // Import Model Repair
 
 class PDFController extends Controller
@@ -16,7 +17,11 @@ class PDFController extends Controller
         // โหลด View 'pdf.repair' และส่งตัวแปร repairs ไปด้วย
         $pdf = PDF::loadView('pdf.repair', compact('repairs'))
             ->setPaper('a4', 'portrait')
-            ->setOptions(['default_font' => 'THSarabunNew']);
+            ->setOption(['default_font' => 'THSarabunNew']);
+
+       
+
+
 
 
 
