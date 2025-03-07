@@ -38,7 +38,7 @@
                     </tbody>
                 </table>
 
-                <button type="submit" class="btn btn-success mt-3">ยืนยันการเลือกพนังงาน</button>
+                <button type="submit" class="btn btn-success mt-3">ยืนยันการเลือกพนักงาน</button>
             </form>
         </div>
     </body>

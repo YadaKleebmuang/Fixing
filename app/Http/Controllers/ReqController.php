@@ -26,7 +26,7 @@ class ReqController extends Controller
                 'employee_id' => null,
             ]);
 
-            return redirect()->route('customer.dashboard')->with('success', 'Repair record created successfully.');
+            return redirect()->route('customer.dashboard')->with('success', '"บันทึกการแจ้งปัญหาสำเร็จ"');
         } catch (Exception $e) {
 
             Log::error('Error creating repair record: ' . $e->getMessage());

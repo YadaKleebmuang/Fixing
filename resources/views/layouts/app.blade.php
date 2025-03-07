@@ -53,7 +53,7 @@
             <ul class="navbar-nav ms-auto">
                 @auth
                     <li class="nav-item d-flex align-items-center">
-                        <img src="" width="30" height="30" alt="Logo" class="me-2">
+                    <img src="{{ asset('management.png') }}" width="30" height="30" alt="Management" class="me-2">
 
                         <a class="nav-link" href="#">
                             <i class="fas fa-user-circle"></i> {{ auth()->user()->name }}
