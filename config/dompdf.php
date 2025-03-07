@@ -21,6 +21,17 @@ return [
     'convert_entities' => true,
 
     'options' => [
+        'font_dir' => public_path('fonts/'),
+        'font_cache' => storage_path('fonts/'),
+        'default_font' => 'THSarabunNew',
+        'fonts' => [
+            'THSarabunNew' => [
+                'R'  => 'THSarabunNew.ttf',
+                'B'  => 'THSarabunNew-Bold.ttf',
+                'I'  => 'THSarabunNew-Italic.ttf',
+                'BI' => 'THSarabunNew-BoldItalic.ttf',
+            ],
+        ],
         /**
          * The location of the DOMPDF font directory
          *

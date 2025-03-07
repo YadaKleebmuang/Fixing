@@ -199,7 +199,7 @@ return [
     ])->toArray(),
 
     'aliases' => [
+        'PDF' => Barryvdh\DomPDF\Facade::class,
         'PDF' => Barryvdh\DomPDF\Facade\Pdf::class, // ✅ ตรวจสอบ Alias ให้ถูกต้อง
-        // 'PDF' => Barryvdh\DomPDF\Facade::class, // ✅ ตรวจสอบ Alias ให้ถูกต้อง
     ],
 ];

@@ -81,6 +81,8 @@
 
         <div class="mt-3">
             <h3>รายละเอียด/ปัญหาของลูกค้า</h3>
+            <a href="{{ route('admin.repairs.pdf') }}" class="btn btn-danger">ดาวน์โหลด PDF</a>
+
             @if ($repair->isEmpty())
                 <p>No repair requests found.</p>
             @else

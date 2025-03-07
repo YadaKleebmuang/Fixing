@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReqController;
+use App\Http\Controllers\PDFController;
 
+Route::get('/admin/repairs/pdf', [PDFController::class, 'generateRepairPDF'])->name('admin.repairs.pdf');
 
 Route::get('/', function () {
     return view('auth.login');
