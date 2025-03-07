@@ -23,7 +23,10 @@ class DashboardController extends Controller
     public function DashboardAdmin()
     {
         $repair = Repair::get();
-        return view("admin.dashboard", compact('repair'));
+
+        $total_repair = Repair::count();
+        $done_repair = Repair::where('status','done')->count();
+        return view("admin.dashboard", compact('repair', 'total_repair', 'done_repair'));
     }
     public function DashboardEmployee()
     {
@@ -39,5 +42,5 @@ class DashboardController extends Controller
     }
 
 
-    
+
 }
